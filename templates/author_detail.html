@@ -1,0 +1,13 @@
+<!-- myapp/templates/author_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Author Detail</h2>
+  <div>
+    <h3>{{ author.author_name }}</h3>
+    <p>Email: {{ author.email }}</p>
+    <p>Action: {{ author.action }}</p>
+    <p>Status: {{ author.status }}</p>
+  </div>
+  <a href="{% url 'author-list' %}">Back to Author List</a>
+{% endblock %}

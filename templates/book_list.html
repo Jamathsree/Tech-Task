@@ -1,0 +1,35 @@
+<!-- myapp/templates/book_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Book List</h2>
+  <div>
+    {% for book in books %}
+      <div>
+        <h3>{{ book.book_name }}</h3>
+        <p>Author: {{ book.author.author_name }}</p>
+        <p>Created Date: {{ book.created_date }}</p>
+        <p>Action: {{ book.action }}</p>
+        <p>Status: {{ book.status }}</p>
+        <a href="{% url 'book-detail' pk=book.pk %}">View Details</a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if books.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ books.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+        </span>
+
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">next</a>
+            <a href="?page={{ books.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+<!-- myapp/templates/author_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Author List</h2>
+  <div>
+    {% for author in authors %}
+      <div>
+        <h3>{{ author.author_name }}</h3>
+        <p>Email: {{ author.email }}</p>
+        <p>Action: {{ author.action }}</p>
+        <p>Status: {{ author.status }}</p>
+        <a href="{% url 'author-detail' pk=author.pk %}">View Details</a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if authors.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ authors.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ authors.number }} of {{ authors.paginator.num_pages }}.
+        </span>
+
+        {% if authors.has_next %}
+            <a href="?page={{ authors.next_page_number }}">next</a>
+            <a href="?page={{ authors.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock %}

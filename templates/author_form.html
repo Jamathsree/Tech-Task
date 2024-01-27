@@ -1,0 +1,12 @@
+<!-- myapp/templates/author_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Create or Update Author</h2>
+  <form method="post" action="{% if object %}{% url 'author-update' pk=object.pk %}{% else %}{% url 'author-create' %}{% endif %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'author-list' %}">Cancel</a>
+{% endblock %}
